@@ -21,7 +21,7 @@ export class OutputLoginUserDto {
   success: boolean;
   token: string;
   user: User;
-  name: string;
   email: string;
+  name: string;
   planName: string;
 }

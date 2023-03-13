@@ -61,9 +61,6 @@ export class AuthService implements IAuthService {
                       email: data.email,
                       planName: response.data.data.plan_name,
                     };
-                  })
-                  .catch((error) => {
-                    throw new Error(error);
                   });
               }
               // caso o usuário não esteja no banco de dados, usuário não autorizado!
@@ -71,8 +68,8 @@ export class AuthService implements IAuthService {
             });
         }
       })
-      .catch((error) => {
-        throw new Error(error);
+      .catch(() => {
+        throw new UnauthorizedException('Usuário não autorizado!');
       });
   }
 }

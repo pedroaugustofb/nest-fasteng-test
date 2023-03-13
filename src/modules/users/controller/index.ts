@@ -62,17 +62,23 @@ export class UsersController {
    */
   @Get(':id') // define a rota
   @ApiOperation({ summary: 'Retorna um usuário do banco de dados' }) // detalha a operação no swagger
+  @ApiResponse({ status: 200, description: 'Usuário encontrado com sucesso!' }) // detalha a resposta no swagger
+  @ApiResponse({ status: 400, description: 'Usuário não encontrado!' }) // detalha a resposta no swagger
   async getUser(@Param('id') id: string): Promise<User> {
     return this.usersService.getUser(id);
   }
 
   @Put() //define a rota
+  @ApiResponse({ status: 200, description: 'Usuário atualizado com sucesso!' }) // detalha a resposta no swagger
+  @ApiResponse({ status: 400, description: 'Usuário não encontrado!' }) // detalha a resposta no swagger
   @ApiOperation({ summary: 'Atualiza um usuário no banco de dados' }) // detalha a operação no swagger
   async updateUser(@Body() body: User): Promise<User> {
     return this.usersService.updateUser(body);
   }
 
   @Delete(':id') //define a rota
+  @ApiResponse({ status: 200, description: 'Usuário excluído com sucesso!' }) // detalha a resposta no swagger
+  @ApiResponse({ status: 400, description: 'Usuário não encontrado!' }) // detalha a resposta no swagger
   @ApiOperation({ summary: 'Deleta um usuário no banco de dados' }) // detalha a operação no swagger
   async deleteUser(@Param('id') id: string): Promise<User> {
     return await this.usersService.deleteUser(id);
