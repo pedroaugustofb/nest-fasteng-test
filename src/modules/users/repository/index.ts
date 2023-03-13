@@ -2,13 +2,11 @@ import { InjectModel } from '@nestjs/mongoose';
 import { FilterQuery, Model } from 'mongoose';
 import { User, UserDocument } from '../schemas/user.schema';
 import { IUserRepository } from '../interfaces';
-import { AlreadyExists } from '../../../utils/exceptions';
 
 export class UsersRepository implements IUserRepository {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
   async create(user: User): Promise<User> {
-    if (await this.findOne({ _id: user._id })) throw new AlreadyExists('User');
     const createdUser = new this.userModel(user);
     return createdUser.save();
   }
